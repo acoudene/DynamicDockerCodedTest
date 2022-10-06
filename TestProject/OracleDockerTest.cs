@@ -71,7 +71,7 @@ namespace TestProject
                 context.Database.EnsureCreated();
 
                 context.Patients!.AddRange(patients.ToArray());
-                context.SaveChanges();
+                context.BulkSaveChanges();
             }
         }
 

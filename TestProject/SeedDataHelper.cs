@@ -12,7 +12,7 @@ namespace TestProject
     public static List<Patient> GeneratePatients()
     {
       var patients = new List<Patient>();
-      for (int i = 0; i < 100; i++)
+      for (int i = 0; i < 1000; i++)
       {
         var patient = new Patient()
         {
