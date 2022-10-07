@@ -1,0 +1,40 @@
+title Dynamic Docker - Integration tests - Read Patients - SQLServer
+
+note over User, IntegrationTest, Docker_SQLServer, EF
+Arrange
+end note
+User->IntegrationTest: ReadPatients_Ok
+IntegrationTest->IntegrationTest: Initialize
+IntegrationTest->Docker_SQLServer: Start SQL-Server container
+Docker_SQLServer-->IntegrationTest:
+IntegrationTest->IntegrationTest: SeedData
+IntegrationTest->IntegrationTest: data=GenerateData
+note over IntegrationTest
+Generate in memory many patients
+with for each many requests with 
+many prescribed tests
+end note
+IntegrationTest->EF: CreateDatabase
+EF->Docker_SQLServer: Create database, tables, ...
+IntegrationTest->EF: MarkToInsert(data)
+IntegrationTest->EF: SaveChanges
+note over IntegrationTest, EF
+Here we can use Bulk SaveChanges 
+to optimize insert/update/delete
+end note
+EF->Docker_SQLServer: DB SaveChanges
+Docker_SQLServer-->EF:
+EF-->IntegrationTest:
+note over User, IntegrationTest, Docker_SQLServer, EF
+Act
+end note
+IntegrationTest->IntegrationTest: ReadPatients_Ok
+IntegrationTest->EF: Get Patients
+EF->Docker_SQLServer: Query Patients
+Docker_SQLServer-->EF:
+EF-->IntegrationTest:
+note over User, IntegrationTest, Docker_SQLServer, EF
+Assert
+end note
+IntegrationTest->IntegrationTest: Assertions to check values
+IntegrationTest-->User: Test ok
