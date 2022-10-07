@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{83C61C5C-5069-4BEE-8DF6-125B371070AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ace.Data", "Ace.Data\Ace.Data.csproj", "{E0F2902B-73AA-4742-8005-4AADA2FC2813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ace.Data", "Ace.Data\Ace.Data.csproj", "{E0F2902B-73AA-4742-8005-4AADA2FC2813}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
