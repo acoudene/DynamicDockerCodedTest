@@ -11,7 +11,7 @@ namespace TestProject
         /// Generate patients with requests and prescribed tests
         /// </summary>
         /// <returns></returns>
-        public static List<Patient> GeneratePatients()
+        public static List<Patient> GenerateData()
         {
             var patients = new List<Patient>();
             for (int i = 0; i < 10; i++)

@@ -108,7 +108,7 @@ namespace TestProject
         /// </summary>
         protected void SeedData()
         {
-            var patients = SeedDataHelper.GeneratePatients();
+            var patients = SeedDataHelper.GenerateData();
             var builder = GetDbContextBuilder();
 
             using (var context = new AceContext(builder.Options))
