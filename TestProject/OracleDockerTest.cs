@@ -119,7 +119,13 @@ namespace TestProject
 
                 // context.SaveChanges();
                 // Replace above line and use this line to optimize
-                context.BulkSaveChanges(options => options.Log = s => _output.WriteLine(s));                
+                /// IncludeGraph allows you to INSERT/UPDATE/MERGE entities by including the child entities graph.
+                /// <see cref="https://entityframework-extensions.net/efcore-devart-oracle-provider"/>
+                context.BulkSaveChanges(options =>
+                {
+                    options.Log = s => _output.WriteLine(s);
+                    options.IncludeGraph = true;
+                });                
             }
         }
 
