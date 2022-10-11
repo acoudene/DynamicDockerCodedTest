@@ -35,7 +35,7 @@ namespace TestProject
         }
 
         [Fact]        
-        public void NgingRequest_Ok()
+        public void NginxRequest_Ok()
         {
             // Just to illustrate, set a breakpoint here
             // Arrange
