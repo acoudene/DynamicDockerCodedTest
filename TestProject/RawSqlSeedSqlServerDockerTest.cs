@@ -3,7 +3,7 @@ namespace TestProject;
 /// <summary>
 /// SqlServer docker Tester
 /// </summary>
-public class SqlServerDockerTest : IAsyncLifetime
+public class RawSqlSeedSqlServerDockerTest : IAsyncLifetime
 {
   /// <summary>
   /// Container
@@ -22,7 +22,7 @@ public class SqlServerDockerTest : IAsyncLifetime
   /// Constructor
   /// </summary>
   /// <param name="output"></param>
-  public SqlServerDockerTest(ITestOutputHelper output)
+  public RawSqlSeedSqlServerDockerTest(ITestOutputHelper output)
   {
     _output = output;
     _config = new ConfigurationBuilder()
@@ -150,19 +150,19 @@ public class SqlServerDockerTest : IAsyncLifetime
   /// Create database if needed and Fill data
   /// </summary>
   protected void SeedData()
-  {      
+  {
+    var patients = SeedDataHelper.GenerateData();
     var builder = GetDbContextBuilder();
-
-    string sqlDataFile = File.ReadAllText(@"sql-server-data.sql");
 
     using (var context = new AceContext(builder.Options))
     {
-      string[] batches = sqlDataFile.Split(new[] { "\nGO" }, StringSplitOptions.None);
+      context.Database.EnsureCreated();
 
-      string script = string.Join("\n", batches);        
-      context.Database.ExecuteSqlRaw(script);
-      
-      
+      context.Patients!.AddRange(patients.ToArray());
+
+      context.SaveChanges();
+      // Replace above line and use this line to optimize
+      // context.BulkSaveChanges(options => options.Log = s => _output.WriteLine(s));                
     }
   }
 
